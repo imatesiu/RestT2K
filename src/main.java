@@ -158,7 +158,7 @@ public class main {
 
 	}
 
-	@SuppressWarnings("unused")
+
 	private static void json(InputStream is,String nomecorpus){
 		JsonReader rdr = Json.createReader(is);
 		JsonObject obj = rdr.readObject();
