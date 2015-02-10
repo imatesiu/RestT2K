@@ -35,6 +35,8 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
+import cnr.ilc.t2k.Corpus;
+
 
 
 
@@ -162,6 +164,11 @@ public class main {
 	private static void json(InputStream is,String nomecorpus){
 		JsonReader rdr = Json.createReader(is);
 		JsonObject obj = rdr.readObject();
+		
+		Corpus cp = new Corpus(obj);
+		
+		System.out.println(cp);
+		/*
 		System.out.println(obj.toString());
 
 		JsonNumber id = obj.getJsonNumber("id");
@@ -178,12 +185,12 @@ public class main {
 	         System.out.println(result.getString("message", ""));
 	         System.out.println("-----------");
 
-	     }*/
+	     }
 		System.out.println("----------- execute/part_of_speech");
 		executePartOfSpeach(id.toString());
 
 		System.out.println("----------- Query/part_of_speech");
-		QueryPartofSpeach(id.toString(), nomecorpus);
+		QueryPartofSpeach(id.toString(), nomecorpus);*/
 	}
 
 	private static void executePartOfSpeach(String id){

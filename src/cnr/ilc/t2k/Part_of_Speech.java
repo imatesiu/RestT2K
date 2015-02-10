@@ -24,14 +24,17 @@ public class Part_of_Speech {
 	public String getStatus() {
 		return status;
 	}
-	
+
 	public Part_of_Speech(JsonObject pos) {
 		//JsonObject pos = obj.getJsonObject("part_of_speech");
 		JsonString jstatus = pos.getJsonString("status");
-		JsonString ufile = pos.getJsonString("analysis_file");
+		if(!pos.isNull("analysis_file")){
+			JsonString ufile = pos.getJsonString("analysis_file");
+			this.analysis_file = ufile.getString();
+		}
 		JsonNumber jid = pos.getJsonNumber("id");
+
 		
-		this.analysis_file = ufile.getString();
 		this.id = jid.intValue();
 		this.status = jstatus.getString();
 	}
@@ -41,9 +44,9 @@ public class Part_of_Speech {
 		return "Part_of_Speech [analysis_file=" + analysis_file + ", id=" + id
 				+ ", status=" + status + "]";
 	}
-	
-	
-	
+
+
+
 
 
 }

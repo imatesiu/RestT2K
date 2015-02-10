@@ -1,9 +1,6 @@
 package cnr.ilc.t2k;
 
-import javax.json.Json;
-import javax.json.JsonNumber;
-import javax.json.JsonObject;
-import javax.json.JsonString;
+import javax.json.*;
 
 public class Term_Extraction_Configuration {
 	String name = null;

@@ -22,10 +22,13 @@ public class Term_Extraction_Indexing {
 
 	public Term_Extraction_Indexing(JsonObject ter) {
 		JsonString jstatus = ter.getJsonString("status");
-		JsonString ufile = ter.getJsonString("conll_file");
+		if(!ter.isNull("conll_file")){
+			JsonString ufile = ter.getJsonString("conll_file");
+			this.conll_file = ufile.getString();
+		}
 		JsonNumber jid = ter.getJsonNumber("id");
 
-		this.conll_file = ufile.getString();
+
 		this.id = jid.intValue();
 		this.status = jstatus.getString();
 	}
@@ -35,8 +38,8 @@ public class Term_Extraction_Indexing {
 		return "Term_Extraction_Indexing [conll_file=" + conll_file + ", id="
 				+ id + ", status=" + status + "]";
 	}
-	
-	
-	
+
+
+
 
 }
