@@ -257,7 +257,7 @@ public class main {
 	}
 
 	private static void downloadUsingStream(String urlStr, String file) {
-		
+
 		try {
 			BufferedInputStream in = new BufferedInputStream(new URL(urlStr).openStream());
 			FileOutputStream  fout = new FileOutputStream(file+".pos");
@@ -271,6 +271,9 @@ public class main {
 				in.close();
 			if (fout != null)
 				fout.close();
+
+			System.out.println("----------------------------------------");
+			System.out.println("write file: "+file+".pos");
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -296,7 +299,9 @@ public class main {
 			fis.close();
 			bis.close();*/
 
-}
+	}
 
+	
+	
 
 }
