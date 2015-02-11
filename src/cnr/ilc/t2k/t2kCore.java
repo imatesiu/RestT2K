@@ -31,6 +31,7 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClientBuilder;
 
+
 public class t2kCore {
 
 
@@ -38,7 +39,12 @@ public class t2kCore {
 	private CredentialsProvider provider=null;
 
 
-
+	/**
+	 * This constructor is used indicate user e password of
+	 * t2k 
+	 * @param user String of user name
+	 * @param pass String of password
+	 */
 	public t2kCore(String user, String pass) {
 
 		provider = new BasicCredentialsProvider();
@@ -53,7 +59,11 @@ public class t2kCore {
 		return corpus;
 	}
 
-
+	/**
+	 * Download existing Corpus
+	 * @param id interger 
+	 * @return Corpus Class
+	 */
 	public Corpus setCorpus(int id){
 		
 		String url = "http://t2k.italianlp.it/rest/corpus/"+id;
@@ -87,7 +97,12 @@ public class t2kCore {
 		
 	}
 
-
+	/**
+	 * Creation of the New Corpus 
+	 * @param file File name with text
+	 * @param corpusname name of corpus
+	 * @param lang Language of corpus
+	 */
 	public void executeNewCorpus(File file, String corpusname, Language lang){
 
 		String url = "http://t2k.italianlp.it/rest/new_corpus";
@@ -154,8 +169,10 @@ public class t2kCore {
 
 	}
 
-
-	public void executePartOfSpeach(){
+	/**
+	 * Execute Part Of Speech of the Corpus
+	 */
+	public void executePartOfSpeech(){
 
 		if(corpus!=null){
 
@@ -179,7 +196,11 @@ public class t2kCore {
 
 	}
 
-	public boolean QueryPartofSpeach(){
+	/**
+	 * Check if Part of Speech is ready
+	 * @return true if Part of Speech is ready
+	 */
+	public boolean QueryPartofSpeech(){
 		if(corpus!=null){
 			String url = "http://t2k.italianlp.it/rest/corpus/"+corpus.getId();
 
@@ -215,7 +236,10 @@ public class t2kCore {
 
 	}
 
-	public void downloadPartofSpeach(){
+	/**
+	 * 	Download Part of Speech file
+	 */
+	public void downloadPartofSpeech(){
 		if(corpus!=null){
 			if(corpus.getPart_of_speech().getStatusBool()){
 				downloadUsingStream(corpus.getPart_of_speech().getAnalysis_file(),"pos");
@@ -253,6 +277,10 @@ public class t2kCore {
 
 	}
 
+	/**
+	 * Return a List of Term Extraction Configuration
+	 * @return List of Term Extraction Configuration
+	 */
 	public List<Term_Extraction_Configuration> getListTerm_Extraction_Configuration(){
 
 		String url = "http://t2k.italianlp.it/rest/term_extraction_configuration/list";
@@ -301,6 +329,10 @@ public class t2kCore {
 	}
 
 
+	/**
+	 * Set Term Extraction Configuration
+	 * @param terc
+	 */
 	public void setTerm_Extraction_Configuration(Term_Extraction_Configuration terc){
 		if(corpus!=null){
 
@@ -327,6 +359,9 @@ public class t2kCore {
 		}
 	}
 
+	/**
+	 * Execute Term Extraction of the Corpus
+	 */
 	public void executeTerm_Extraction(Term_Extraction_Configuration terc){
 		if(corpus!=null && corpus.getPart_of_speech().getStatusBool()){
 			setTerm_Extraction_Configuration(terc);
@@ -351,6 +386,10 @@ public class t2kCore {
 
 	}
 
+	/**
+	 * Check if Term Extraction is ready
+	 * @return true if Term Extraction is ready
+	 */
 	public boolean QueryTerm_Extraction(){
 		if(corpus!=null && corpus.getPart_of_speech().getStatusBool()){
 			String url = "http://t2k.italianlp.it/rest/corpus/"+corpus.getId();
@@ -387,6 +426,9 @@ public class t2kCore {
 
 	}
 
+	/**
+	 * 	Download Term Extraction file
+	 */
 	public void downloadTerm_Extraction(){
 		if(corpus!=null){
 			if(corpus.getTerm_extraction().getStatusBool()){
@@ -396,7 +438,9 @@ public class t2kCore {
 
 	}
 
-
+	/**
+	 * Execute Term Extraction Indexer of the Corpus
+	 */
 	public void executeTerm_Extraction_Indexer(){
 		if(corpus!=null && corpus.getTerm_extraction().getStatusBool()){
 
@@ -421,6 +465,10 @@ public class t2kCore {
 
 	}
 
+	/**
+	 * Check if Term Extraction Indexer is ready
+	 * @return true if Term Extraction Indexer is ready
+	 */
 	public boolean QueryTerm_Extraction_Indexer(){
 		if(corpus!=null &&  corpus.getTerm_extraction().getStatusBool()){
 			String url = "http://t2k.italianlp.it/rest/corpus/"+corpus.getId();
@@ -457,6 +505,9 @@ public class t2kCore {
 
 	}
 
+	/**
+	 * 	Download Term Extraction Indexer file
+	 */
 	public void downloadTerm_Extraction_Indexer(){
 		if(corpus!=null){
 			if(corpus.getTerm_extraction_indexing().getStatusBool()){

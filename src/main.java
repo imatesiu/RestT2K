@@ -58,11 +58,7 @@ import java.io.File;
 public class main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method s
-
-
-		//	sendPost("eurocali.txt", new File("eurocali.txt"));
-
+		
 
 		t2kCore t2k = new t2kCore("FMTLab", "FMTLab2013");
 
@@ -72,19 +68,19 @@ public class main {
 		
 		t2k.setCorpus(772);
 
-		t2k.executePartOfSpeach();
+		t2k.executePartOfSpeech();
 
-		while(!t2k.QueryPartofSpeach()){
+		while(!t2k.QueryPartofSpeech()){
 			try {
 				Thread.sleep(5000);
 				System.out.println("Pausa POS ");
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		}
 
-		t2k.downloadPartofSpeach();
+		t2k.downloadPartofSpeech();
 
 		List<Term_Extraction_Configuration> col = t2k.getListTerm_Extraction_Configuration();
 
@@ -110,7 +106,6 @@ public class main {
 				Thread.sleep(5000);
 				System.out.println("Pausa TEI ");
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

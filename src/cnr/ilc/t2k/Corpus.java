@@ -100,7 +100,7 @@ public class Corpus {
 
 	@Override
 	public String toString() {
-		return "Corpus [corpusName=" + corpusName + ", file=" + file + ", id="
+		return "Corpus [corpusName=" + corpusName + ",  id="
 				+ id + ", Language=" + language + ", Status=" + Status
 				+ ", Corpus_file=" + Corpus_file + ", part_of_speech="
 				+ part_of_speech + ", term_extraction=" + term_extraction
