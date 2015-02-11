@@ -7,11 +7,11 @@ import javax.json.JsonString;
 
 public class Term_Extraction {
 
-	String analysis_file = null;
+	private String analysis_file = null;
 
-	int id = 0;
+	private int id = 0;
 
-	String status = null;
+	private String status = null;
 
 	public String getAnalysis_file() {
 		return analysis_file;
@@ -42,5 +42,11 @@ public class Term_Extraction {
 	}
 
 
+	public boolean getStatusBool() {
+		if(status.equals(new String("successful"))){
+			return true;
+		}
+		return false;
+	}
 
 }

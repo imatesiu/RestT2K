@@ -3,29 +3,29 @@ package cnr.ilc.t2k;
 import javax.json.*;
 
 public class Term_Extraction_Configuration {
-	String name = null;
-	boolean apply_contrast = false;
-	String contrast_corpus = "1";
+	private String name = null;
+	private boolean apply_contrast = false;
+	private int contrast_corpus = 1;
 
-	int id = 0;
+	private int id = 0;
 
-	String part_of_speech_tagset_start_term = null;
-	String part_of_speech_tagset_internal_term = null;
-	String part_of_speech_tagset_end_term = null;
+	private String part_of_speech_tagset_start_term = null;
+	private String part_of_speech_tagset_internal_term = null;
+	private String part_of_speech_tagset_end_term = null;
 
-	String ortographic_unit = "LEMMA";
+	private String ortographic_unit = "LEMMA";
 
-	int max_term_length = 5;
+	private int max_term_length = 5;
 
-	int multiword_threshold = 200;
+	private int multiword_threshold = 200;
 
-	int singleword_threshold = 200;
+	private int singleword_threshold = 200;
 
-	int frequency_threshold = 10;
+	private int frequency_threshold = 10;
 
-	String contrast_algorithm = "C_NC";
+	private String contrast_algorithm = "C_NC";
 
-	String language = "GB";
+	private String language = "GB";
 
 	public Term_Extraction_Configuration() {
 		part_of_speech_tagset_start_term = new String();
@@ -90,9 +90,16 @@ public class Term_Extraction_Configuration {
 		this.apply_contrast = apply_contrast;
 	}
 
-	public void setContrast_corpus(String contrast_corpus) {
+	public void setContrast_corpus(int contrast_corpus) {
 		this.contrast_corpus = contrast_corpus;
 	}
+
+
+
+	public int getId() {
+		return id;
+	}
+
 
 	public void setOrtographic_unit(String ortographic_unit) {
 		this.ortographic_unit = ortographic_unit;
@@ -150,8 +157,9 @@ public class Term_Extraction_Configuration {
 
 		name = terc.getJsonString("name").getString();
 		apply_contrast = terc.getBoolean("apply_contrast");
-		contrast_corpus = terc.getJsonNumber("contrast_corpus").toString();
-
+		if(!terc.isNull("contrast_corpus")){
+			contrast_corpus = terc.getJsonNumber("contrast_corpus").intValue();
+		}
 		id = terc.getJsonNumber("id").intValue();
 
 		part_of_speech_tagset_start_term = terc.getJsonString("part_of_speech_tagset_start_term").getString();
@@ -192,7 +200,7 @@ public class Term_Extraction_Configuration {
 				+ ", contrast_algorithm=" + contrast_algorithm + ", language="
 				+ language + "]";
 	}
-	
-	
+
+
 
 }

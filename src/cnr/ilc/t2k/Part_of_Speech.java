@@ -4,11 +4,11 @@ import javax.json.*;
 
 public class Part_of_Speech {
 
-	String analysis_file = null;
+	private String analysis_file = null;
 
-	int id = 0;
+	private int id = 0;
 
-	String status = null;
+	private String status = null;
 
 	public Part_of_Speech(String analysis_file, int id, String status) {
 
@@ -46,6 +46,12 @@ public class Part_of_Speech {
 	}
 
 
+	public boolean getStatusBool() {
+		if(status.equals(new String("successful"))){
+			return true;
+		}
+		return false;
+	}
 
 
 
