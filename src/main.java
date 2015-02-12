@@ -64,9 +64,9 @@ public class main {
 
 		File file = new File("test.txt");
 
-		//t2k.executeNewCorpus(file, "test", Language.English);
+		t2k.executeNewCorpus(file, "test", Language.English);
 		
-		t2k.setCorpus(772);
+		//t2k.setCorpus(772);
 
 		t2k.executePartOfSpeech();
 
@@ -114,6 +114,9 @@ public class main {
 		
 
 		System.out.println("Fine "+t2k.getCorpus());
+		
+		
+		t2k.delCorpus();
 
 	}
 

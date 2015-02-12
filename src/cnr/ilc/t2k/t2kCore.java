@@ -65,7 +65,7 @@ public class t2kCore {
 	 * @return Corpus Class
 	 */
 	public Corpus setCorpus(int id){
-		
+
 		String url = "http://t2k.italianlp.it/rest/corpus/"+id;
 
 		try {
@@ -92,9 +92,48 @@ public class t2kCore {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return null;
-		
+
+	}
+
+	public boolean delCorpus(){
+		if(corpus!=null){
+			boolean result = delCorpus(corpus.getId());
+			corpus = null;
+			return result;
+		}
+		return false;
+	}
+
+	public boolean delCorpus(int id){
+
+		String url = "http://t2k.italianlp.it/rest/corpus/"+id+"/execute/delete";
+
+		try {
+			HttpGet httpget = new HttpGet(url);
+
+			HttpClient client = HttpClientBuilder.create().setDefaultCredentialsProvider(provider).build();
+
+			HttpResponse response = client.execute(httpget);
+			System.out.println("----------------------------------------");
+			System.out.println(response.getStatusLine());
+			//HttpEntity resEntity = response.getEntity();
+
+
+
+			return true;
+
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
+
 	}
 
 	/**
