@@ -9,4 +9,4 @@ Status project [![Build Status](https://travis-ci.org/imatesiu/RestT2K.svg?branc
 
 Special Thanks To
 
-Andrea Cimino <andrea.cimino at ilc.cnr.it> for T2k rest API
+Andrea Cimino --andrea.cimino at ilc.cnr.it-- for T2k rest API
