@@ -4,8 +4,8 @@ import javax.json.*;
 
 public class Term_Extraction_Configuration {
 	private String name = null;
-	private boolean apply_contrast = false;
-	private int contrast_corpus = 1;
+	private boolean apply_contrast = true;
+	private int contrast_corpus = 0;
 
 	private int id = 0;
 
@@ -27,11 +27,12 @@ public class Term_Extraction_Configuration {
 
 	private String language = "GB";
 
-	public Term_Extraction_Configuration() {
+	public Term_Extraction_Configuration(String Name) {
 		part_of_speech_tagset_start_term = new String();
 		part_of_speech_tagset_internal_term = new String();
 		part_of_speech_tagset_end_term = new String();
-		name=new String();
+		name=Name;
+
 
 	}
 
@@ -131,22 +132,27 @@ public class Term_Extraction_Configuration {
 
 
 	public JsonObject getTerm_Extraction_Configuration() {
-		JsonObject value = Json.createObjectBuilder()
-				.add("name", this.name)
-				.add("apply_contrast", this.apply_contrast)
-				.add("contrast_corpus", this.contrast_algorithm)
-				.add("part_of_speech_tagset_start_term",this.part_of_speech_tagset_start_term)
-				.add("part_of_speech_tagset_internal_term", this.part_of_speech_tagset_internal_term)
-				.add("part_of_speech_tagset_end_term", this.part_of_speech_tagset_end_term)
-				.add("ortographic_unit",this.ortographic_unit)
-				.add("max_term_length", this.max_term_length)
-				.add("multiword_threshold", this.multiword_threshold)
-				.add("singleword_threshold",this.singleword_threshold)
-				.add("frequency_threshold", this.frequency_threshold)
-				.add("language", this.language)
-				.add("contrast_algorithm", this.contrast_algorithm)
-				.build();
 
+		JsonObjectBuilder val = Json.createObjectBuilder()
+				.add("name", this.name)
+				.add("apply_contrast", this.apply_contrast);
+		if(this.contrast_corpus<=0){
+			val.add("contrast_corpus",  JsonValue.NULL);
+		}else{
+			val.add("contrast_corpus",  this.contrast_corpus);
+		}	
+		val.add("part_of_speech_tagset_start_term",this.part_of_speech_tagset_start_term)
+		.add("part_of_speech_tagset_internal_term", this.part_of_speech_tagset_internal_term)
+		.add("part_of_speech_tagset_end_term", this.part_of_speech_tagset_end_term)
+		.add("ortographic_unit",this.ortographic_unit)
+		.add("max_term_length", this.max_term_length)
+		.add("multiword_threshold", this.multiword_threshold)
+		.add("singleword_threshold",this.singleword_threshold)
+		.add("frequency_threshold", this.frequency_threshold)
+		.add("language", this.language)
+		.add("contrast_algorithm", this.contrast_algorithm);
+
+		JsonObject value = val.build();
 
 		return value;
 

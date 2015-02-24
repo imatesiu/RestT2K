@@ -6,8 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
-
 import java.util.List;
 
 import javax.json.Json;
@@ -23,6 +23,7 @@ import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.EntityBuilder;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
@@ -414,6 +415,72 @@ public class t2kCore {
 				HttpResponse response = client.execute(httpget);
 				System.out.println("----------------------------------------");
 				System.out.println(response.getStatusLine());
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
+	/**
+	 * put Term Extraction Configuration
+	 */
+	public void putTerm_Extraction_Configuration(Term_Extraction_Configuration terc){
+		if(terc!=null){
+			
+			String url = "http://t2k.italianlp.it/rest/term_extraction_configuration";
+			try {
+				String boundary = "------------------------" + System.currentTimeMillis();
+				
+				//String encoded = URLEncoder.encode(terc.getTerm_Extraction_Configuration().toString(), "utf-8");
+				
+				HttpPost httpPost = new HttpPost(url);
+				EntityBuilder builder = EntityBuilder.create();  
+			//	builder.setBoundary(boundary);
+				//builder.setMode(HttpMultipartMode.STRICT);
+				
+			//	ContentType contenttype = ContentType.create("text/plain");
+
+
+				
+				httpPost.addHeader("Content-Type","application/json"); //; boundary="+boundary);
+
+				builder.setText(terc.getTerm_Extraction_Configuration().toString());//,contenttype);
+
+				//builder.addTextBody("language", lang.toString(),contenttype);
+
+
+				//builder.addBinaryBody("corpus_file", file, contenttype, file.getName());
+				
+				HttpEntity entity = builder.build();
+
+
+				httpPost.setEntity(entity);
+
+
+				HttpClient client = HttpClientBuilder.create().setDefaultCredentialsProvider(provider).build();
+
+
+				HttpResponse response = client.execute(httpPost);
+
+
+				System.out.println("----------------------------------------");
+				System.out.println(response.getStatusLine());
+				HttpEntity resEntity = response.getEntity();
+
+				JsonReader rdr = Json.createReader(resEntity.getContent());
+				JsonObject obj = rdr.readObject();
+
+				Term_Extraction_Configuration terc_returned = new Term_Extraction_Configuration(obj);
+
+				System.out.println(terc_returned);
+				
+				
+				
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

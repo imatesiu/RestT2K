@@ -40,8 +40,10 @@ import org.apache.http.util.EntityUtils;*/
 
 import cnr.ilc.t2k.Corpus;
 import cnr.ilc.t2k.Language;
+import cnr.ilc.t2k.Part_of_Speech_Tagset;
 import cnr.ilc.t2k.Term_Extraction_Configuration;
 import cnr.ilc.t2k.t2kCore;
+
 import java.util.List;
 import java.io.File;
 
@@ -60,7 +62,24 @@ public class main {
 	public static void main(String[] args) {
 		
 
-		t2kCore t2k = new t2kCore("FMTLab", "FMTLab2013");
+		t2kCore t2k = new t2kCore("FMTLab", "");
+		
+		
+		//// Term_Extraction_Configuration
+		
+		Term_Extraction_Configuration tec = new Term_Extraction_Configuration("NuovaConf");
+		
+		tec.setPart_of_speech_tagset_start_term(Part_of_Speech_Tagset.Coordinatingconjunction,Part_of_Speech_Tagset.Nounsingular );
+		tec.setPart_of_speech_tagset_internal_term(Part_of_Speech_Tagset.Coordinatingconjunction,Part_of_Speech_Tagset.Nounsingular );
+		
+		tec.setPart_of_speech_tagset_end_term(Part_of_Speech_Tagset.Coordinatingconjunction,Part_of_Speech_Tagset.Nounsingular );
+		
+		
+		t2k.putTerm_Extraction_Configuration(tec);
+		
+	
+		
+		////
 
 		File file = new File("test.txt");
 
