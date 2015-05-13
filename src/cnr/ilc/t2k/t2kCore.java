@@ -279,21 +279,26 @@ public class t2kCore {
 	/**
 	 * 	Download Part of Speech file
 	 */
-	public void downloadPartofSpeech(){
+	public void downloadPartofSpeech(String path){
 		if(corpus!=null){
 			if(corpus.getPart_of_speech().getStatusBool()){
-				downloadUsingStream(corpus.getPart_of_speech().getAnalysis_file(),"pos");
+				downloadUsingStream(corpus.getPart_of_speech().getAnalysis_file(),"pos", path);
 			}
 		}
 
 	}
 
-	private void downloadUsingStream(String urlStr,String ext) {
+	private void downloadUsingStream(String urlStr,String ext, String path) {
 
 		String url =  "http://t2k.italianlp.it";
 		try {
 			BufferedInputStream in = new BufferedInputStream(new URL(url+urlStr).openStream());
-			FileOutputStream  fout = new FileOutputStream(corpus.getCorpusName()+"."+ext+".txt");
+			FileOutputStream  fout =null;
+			if(path!=null){
+				fout = new FileOutputStream(path+corpus.getCorpusName()+"."+ext+".txt");
+			}else{
+				fout = new FileOutputStream(corpus.getCorpusName()+"."+ext+".txt");
+			}
 
 			byte data[] = new byte[1024];
 			int count;
@@ -425,28 +430,28 @@ public class t2kCore {
 		}
 
 	}
-	
+
 	/**
 	 * put Term Extraction Configuration
 	 */
 	public void putTerm_Extraction_Configuration(Term_Extraction_Configuration terc){
 		if(terc!=null){
-			
+
 			String url = "http://t2k.italianlp.it/rest/term_extraction_configuration";
 			try {
 				String boundary = "------------------------" + System.currentTimeMillis();
-				
+
 				//String encoded = URLEncoder.encode(terc.getTerm_Extraction_Configuration().toString(), "utf-8");
-				
+
 				HttpPost httpPost = new HttpPost(url);
 				EntityBuilder builder = EntityBuilder.create();  
-			//	builder.setBoundary(boundary);
+				//	builder.setBoundary(boundary);
 				//builder.setMode(HttpMultipartMode.STRICT);
-				
-			//	ContentType contenttype = ContentType.create("text/plain");
+
+				//	ContentType contenttype = ContentType.create("text/plain");
 
 
-				
+
 				httpPost.addHeader("Content-Type","application/json"); //; boundary="+boundary);
 
 				builder.setText(terc.getTerm_Extraction_Configuration().toString());//,contenttype);
@@ -455,7 +460,7 @@ public class t2kCore {
 
 
 				//builder.addBinaryBody("corpus_file", file, contenttype, file.getName());
-				
+
 				HttpEntity entity = builder.build();
 
 
@@ -478,9 +483,9 @@ public class t2kCore {
 				Term_Extraction_Configuration terc_returned = new Term_Extraction_Configuration(obj);
 
 				System.out.println(terc_returned);
-				
-				
-				
+
+
+
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -535,10 +540,10 @@ public class t2kCore {
 	/**
 	 * 	Download Term Extraction file
 	 */
-	public void downloadTerm_Extraction(){
+	public void downloadTerm_Extraction(String path){
 		if(corpus!=null){
 			if(corpus.getTerm_extraction().getStatusBool()){
-				downloadUsingStream(corpus.getTerm_extraction().getAnalysis_file(),"ter");
+				downloadUsingStream(corpus.getTerm_extraction().getAnalysis_file(),"ter",path);
 			}
 		}
 
@@ -614,10 +619,10 @@ public class t2kCore {
 	/**
 	 * 	Download Term Extraction Indexer file
 	 */
-	public void downloadTerm_Extraction_Indexer(){
+	public void downloadTerm_Extraction_Indexer(String path){
 		if(corpus!=null){
 			if(corpus.getTerm_extraction_indexing().getStatusBool()){
-				downloadUsingStream(corpus.getTerm_extraction_indexing().getConll_file(),"cnll");
+				downloadUsingStream(corpus.getTerm_extraction_indexing().getConll_file(),"conll",path);
 			}
 		}
 

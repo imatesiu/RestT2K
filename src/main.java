@@ -99,7 +99,7 @@ public class main {
 			}
 		}
 
-		t2k.downloadPartofSpeech();
+		t2k.downloadPartofSpeech(null);
 
 		List<Term_Extraction_Configuration> col = t2k.getListTerm_Extraction_Configuration();
 
@@ -115,7 +115,7 @@ public class main {
 			}
 		}
 
-		t2k.downloadTerm_Extraction();
+		t2k.downloadTerm_Extraction(null);
 		
 		
 		t2k.executeTerm_Extraction_Indexer();
@@ -129,7 +129,7 @@ public class main {
 			}
 		}
 		
-		t2k.downloadTerm_Extraction_Indexer();
+		t2k.downloadTerm_Extraction_Indexer(null);
 		
 
 		System.out.println("Fine "+t2k.getCorpus());
